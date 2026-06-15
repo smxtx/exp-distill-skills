@@ -1,0 +1,74 @@
+# GitHub Actions Workflow - 请手动添加此文件
+
+## 文件路径
+`.github/workflows/publish-to-clawhub.yml`
+
+## 文件内容（请完整复制）
+
+```yaml
+name: Publish Skills to ClawHub
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ClawHub CLI
+        run: npm install -g clawhub
+
+      - name: Login to ClawHub
+        run: clawhub login --token ${{ secrets.CLAWHUB_TOKEN }} --no-browser
+        env:
+          CLAWHUB_DISABLE_TELEMETRY: '1'
+
+      - name: Publish all skills
+        run: |
+          for SKILL_DIR in jing-yan-cui-qu industry-exp-distill tech-exp-distill finance-exp-distill mfg-exp-distill; do
+            if [ -d "$SKILL_DIR" ]; then
+              echo "Publishing $SKILL_DIR..."
+              clawhub publish "./$SKILL_DIR" \
+                --slug "$SKILL_DIR" \
+                --name "$SKILL_DIR" \
+                --version "1.0.0" \
+                --changelog "Initial release" \
+                --tags "experience-distillation,minimax,openclaw"
+              echo "✓ Published $SKILL_DIR"
+            fi
+          done
+```
+
+## 添加步骤
+
+1. 访问 GitHub 仓库: https://github.com/smxtx/exp-distill-skills
+2. 点击 **Add file** → **Create new file**
+3. 文件名输入: `.github/workflows/publish-to-clawhub.yml`
+4. 粘贴上面的内容
+5. 点击 **Commit changes**
+
+## 添加 Secret
+
+1. 进入仓库 **Settings** → **Secrets and variables** → **Actions**
+2. 点击 **New repository secret**
+3. 名称: `CLAWHUB_TOKEN`
+4. 值: 您的 ClawHub Token（格式: `clh_xxx`）
+5. 点击 **Add secret**
+
+## 运行 Workflow
+
+1. 进入仓库 **Actions** 页面
+2. 选择 **Publish Skills to ClawHub**
+3. 点击 **Run workflow**
+
+---
+
+**此文件用于参考，请通过GitHub网页界面手动创建workflow**
