@@ -1,0 +1,85 @@
+{
+  "update_system_version": "1.0.0",
+  "config_name": "经验萃取Skill自动更新配置",
+  "github": {
+    "repo": "",
+    "token": "",
+    "auto_sync": false,
+    "sync_on_update": true,
+    "commit_message_template": "Auto-update {skill_id}: {summary}"
+  },
+  "update_settings": {
+    "auto_check_on_load": true,
+    "update_interval_days": 7,
+    "max_trends_per_skill": 5,
+    "backup_before_update": true,
+    "changelog_enabled": true
+  },
+  "search_config": {
+    "tech-exp-distill": {
+      "enabled": true,
+      "keywords": [
+        "agile development best practices 2024",
+        "DevOps trends 2024",
+        "software architecture patterns",
+        "site reliability engineering",
+        "continuous integration deployment"
+      ],
+      "sources": ["techcrunch", "infoworld", "martinfowler.com"]
+    },
+    "finance-exp-distill": {
+      "enabled": true,
+      "keywords": [
+        "digital transformation banking 2024",
+        "fintech innovation trends",
+        "risk management best practices",
+        "financial technology regulation",
+        "insurtech developments"
+      ],
+      "sources": ["mckinsey.com", "bcg.com", "financialtimes.com"]
+    },
+    "mfg-exp-distill": {
+      "enabled": true,
+      "keywords": [
+        "smart manufacturing industry 4.0",
+        "lean production best practices",
+        "supply chain management trends",
+        "predictive maintenance manufacturing"
+      ],
+      "sources": ["mckinsey.com", "forbes.com/manufacturing"]
+    },
+    "industry-exp-distill": {
+      "enabled": true,
+      "keywords": [
+        "knowledge management best practices 2024",
+        "industry experience distillation",
+        "cross-industry best practices"
+      ],
+      "sources": ["hbr.org", "mckinsey.com"]
+    },
+    "jing-yan-cui-qu": {
+      "enabled": true,
+      "keywords": [
+        "personal knowledge management 2024",
+        "experience distillation methods",
+        "career growth learning strategies"
+      ],
+      "sources": ["hbr.org", "fastcompany.com"]
+    }
+  },
+  "version_control": {
+    "auto_bump_on_update": true,
+    "version_level": "minor",
+    "changelog_format": "markdown"
+  },
+  "logging": {
+    "enabled": true,
+    "log_dir": "/workspace/.minimax/skills/_update_system/logs",
+    "log_retention_days": 90
+  },
+  "backup": {
+    "enabled": true,
+    "backup_dir": "/workspace/.minimax/skills/_update_system/backups",
+    "keep_last_n_backups": 10
+  }
+}
