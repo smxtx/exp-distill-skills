@@ -1,0 +1,17 @@
+name: Publish Skills to ClawHub
+on:
+  workflow_dispatch:
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g clawhub
+      - run: clawhub login --token ${{ secrets.CLAWHUB_TOKEN }} --no-browser
+      - run: |
+          for d in jing-yan-cui-qu industry-exp-distill tech-exp-distill finance-exp-distill mfg-exp-distill; do
+            clawhub publish "./$d" --slug "$d" --name "$d" --version "1.0.0"
+          done
